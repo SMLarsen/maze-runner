@@ -3,6 +3,7 @@ function mazeRunner(maze, directions) {
 
   let begCell = findCell(2);
   let endCell = findCell(3);
+  let curCell = begCell;
 
   function findCell(target) {
     for (let i = 0; i < maze.length; i++) {
@@ -19,11 +20,39 @@ function mazeRunner(maze, directions) {
   console.log('begCell:', begCell);
   console.log('endCell:', endCell);
 
-  directions.forEach(move);
-
-  function move(step) {
-    console.log('step:', step);
+  for (let i = 0; i < directions.length; i++) {
+    switch (directions[i]) {
+      case 'N':
+        curCell.row -= 1;
+        break;
+      case 'W':
+        curCell.col -= 1;
+        break;
+      case 'S':
+        curCell.row += 1;
+        break;
+      case 'E':
+        curCell.col += 1;
+        break;
+      default:
+        return "Error - invalid move";
+    }
+    console.log('move:', directions[i], 'curCell:', curCell, 'maze[curCell.row][curCell.col]:', maze[curCell.row][curCell.col]);
+    console.log(maze[curCell.row][curCell.col] == 1);
+    if (maze[curCell.row][curCell.col] == 1) {
+      console.log('Dead');
+      return "Dead";
+    } else if (i === directions.length - 1) {
+      if (maze[curCell.row][curCell.col] == 3) {
+        console.log('Finish');
+        return "Finish";
+      } else {
+        console.log('Lost');
+        return "Lost";
+      }
+    }
   }
+
 }
 
 var maze = [
@@ -36,7 +65,7 @@ var maze = [
   [1, 2, 1, 0, 1, 0, 1]
 ];
 
-mazeRunner(maze, ["N", "N", "N", "N", "N", "E", "E", "E", "E", "E"]);
+mazeRunner(maze, ["N","N","N","N","N","E","E","S","S","E","E","N","N","E"]);
 
 /*
 Test.expect(mazeRunner(maze,["N","N","N","N","N","E","E","E","E","E"])=="Finish", "Expected Finish");
