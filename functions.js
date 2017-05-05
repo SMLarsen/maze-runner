@@ -1,58 +1,52 @@
 /*jshint esversion: 6 */
-function Game(board) {
-  this.board = board;
-  this.leaps = 0;
-  this.play = function() {
-    console.log(this.leaps);
-    return this.leaps;
-  };
+function mazeRunner(maze, directions) {
+
+  let begCell = findCell(2);
+  let endCell = findCell(3);
+
+  function findCell(target) {
+    for (let i = 0; i < maze.length; i++) {
+      if (maze[i].indexOf(target) !== -1) {
+        let start = {
+          row: i,
+          col: maze[i].indexOf(target)
+        };
+        return start;
+      }
+    }
+  }
+
+  console.log('begCell:', begCell);
+  console.log('endCell:', endCell);
+
+  directions.forEach(move);
+
+  function move(step) {
+    console.log('step:', step);
+  }
 }
 
-// Game.prototype.play = function() {
-// };
-
-const board = [
-  [1, 1, 0, 0, 0],
-  [1, 1, 0, 0, 0],
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 1, 1],
-  [0, 0, 0, 1, 1]
+var maze = [
+  [1, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 0, 3],
+  [1, 0, 1, 0, 1, 0, 1],
+  [0, 0, 1, 0, 0, 0, 1],
+  [1, 0, 1, 0, 1, 0, 1],
+  [1, 0, 0, 0, 0, 0, 1],
+  [1, 2, 1, 0, 1, 0, 1]
 ];
 
-game = new Game(board);
-
-game.play();
+mazeRunner(maze, ["N", "N", "N", "N", "N", "E", "E", "E", "E", "E"]);
 
 /*
-board = [[1,1,0,0,0],
-         [1,1,0,0,0],
-         [0,0,0,0,0],
-         [0,0,0,1,1],
-         [0,0,0,1,1]];
-game = new Game(board);
-Test.expect(game.play()==2, "Should return '2'");
+Test.expect(mazeRunner(maze,["N","N","N","N","N","E","E","E","E","E"])=="Finish", "Expected Finish");
+Test.expect(mazeRunner(maze,["N","N","N","N","N","E","E","S","S","E","E","N","N","E"])=="Finish", "Expected Finish");
+Test.expect(mazeRunner(maze,["N","N","N","N","N","E","E","E","E","E","W","W"])=="Finish", "Expected Finish");
 
-board = [[1,0,1,0,1],
-         [1,0,1,0,1],
-         [1,1,1,0,0],
-         [0,0,0,1,1],
-         [0,0,0,1,1]];
-game = new Game(board);
-Test.expect(game.play()==3, "Should return '3'");
+Test.expect(mazeRunner(maze,["N","N","N","W","W"])=="Dead", "Expected Dead");
+Test.expect(mazeRunner(maze,["N","N","N","N","N","E","E","S","S","S","S","S","S"])=="Dead", "Expected Dead");
 
-board = [[1,0,1,0,1],
-         [0,1,0,1,0],
-         [1,0,1,0,1],
-         [0,1,0,1,0],
-         [1,0,1,0,1]];
-game = new Game(board);
-Test.expect(game.play()==13, "Should return '13'");
+Test.expect(mazeRunner(maze,["N","E","E","E","E"])=="Lost", "Expected Lost");
 
-board = [[1,0,0,0,0],
-         [0,0,1,1,0],
-         [1,0,1,0,1],
-         [1,1,1,1,0],
-         [1,1,1,0,1]];
-game = new Game(board);
-Test.expect(game.play()==4, "Should return '4'");
+
 */

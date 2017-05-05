@@ -1,0 +1,19 @@
+{
+  "name": "maze-runner",
+  "version": "1.0.0",
+  "description": "Codewars kata (6kyu)",
+  "main": "functions.js",
+  "scripts": {
+    "test": "node functions.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SMLarsen/maze-runner.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SMLarsen/maze-runner/issues"
+  },
+  "homepage": "https://github.com/SMLarsen/maze-runner#readme"
+}
