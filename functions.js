@@ -37,19 +37,24 @@ function mazeRunner(maze, directions) {
       default:
         return "Error - invalid move";
     }
-    console.log('move:', directions[i], 'curCell:', curCell, 'maze[curCell.row][curCell.col]:', maze[curCell.row][curCell.col]);
-    console.log(maze[curCell.row][curCell.col] == 1);
-    if (maze[curCell.row][curCell.col] == 1) {
-      console.log('Dead');
+
+    console.log('move:', directions[i], 'curCell:', curCell);
+
+    if (parseInt(curCell.col, 10) < 0 || curCell.col >= maze[0].length || curCell.row < 0 || curCell.row >= maze.length) {
+      console.log("Dead");
       return "Dead";
+
+    } else if (maze[curCell.row][curCell.col] == 1) {
+      console.log("Dead");
+      return "Dead";
+
+    } else if (maze[curCell.row][curCell.col] == 3) {
+      console.log("Finish");
+      return "Finish";
+
     } else if (i === directions.length - 1) {
-      if (maze[curCell.row][curCell.col] == 3) {
-        console.log('Finish');
-        return "Finish";
-      } else {
-        console.log('Lost');
-        return "Lost";
-      }
+      console.log("Lost");
+      return "Lost";
     }
   }
 
@@ -65,7 +70,7 @@ var maze = [
   [1, 2, 1, 0, 1, 0, 1]
 ];
 
-mazeRunner(maze, ["N","N","N","N","N","E","E","S","S","E","E","N","N","E"]);
+mazeRunner(maze, ["N","N","N","W","W"]);
 
 /*
 Test.expect(mazeRunner(maze,["N","N","N","N","N","E","E","E","E","E"])=="Finish", "Expected Finish");
